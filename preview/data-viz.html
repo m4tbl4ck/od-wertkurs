@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wertkurs — Charts &amp; Data Viz (Kit)</title>
+<link rel="stylesheet" href="https://use.typekit.net/pdd3dqx.css">
+<script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+<link rel="stylesheet" href="../kits/colors_and_type.css">
+<link rel="stylesheet" href="../kits/wertkurs-charts.css">
+<style>
+  body{margin:0;background:var(--color-background,#fff);color:var(--color-neutral-darker,#1b1b1b);font-family:var(--font-body,"new-hero",sans-serif);padding:32px;}
+  .eyebrow{font:700 .875rem/1.2 var(--font-body,sans-serif);text-transform:uppercase;letter-spacing:.16em;color:var(--color-yellow-metal,#8fd9b6);margin:0 0 12px;}
+  h1{font-family:var(--font-heading,"new-hero",sans-serif);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:clamp(2rem,4vw,3rem);margin:0 0 8px;}
+  .note{color:var(--color-neutral,#808080);font-size:.9rem;max-width:72ch;margin:0 0 32px;}
+  h2{font-family:var(--font-heading,sans-serif);font-weight:700;text-transform:uppercase;font-size:1.25rem;margin:40px 0 16px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;}
+  .links{display:flex;gap:16px;flex-wrap:wrap;}
+  .toollink{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;background:var(--color-neutral-lightest,#f2f2f2);border:1px solid var(--color-border,#d9d9d9);border-radius:8px;padding:16px 20px;font-weight:700;transition:transform .15s ease,box-shadow .15s ease;}
+  .toollink:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(2,2,2,.1);}
+  .toollink i{color:var(--color-yellow-metal,#8fd9b6);}
+</style>
+</head>
+<body>
+  <p class="eyebrow">wertkurs · Open Design Preview — Kits</p>
+  <h1>Charts &amp; Beratungstools</h1>
+  <p class="note">Diese Preview lädt die <strong>echten wertkurs-Kits</strong> (Chart.js-Engine <code>WK</code> + Beratungstools-Styles), nicht nur Tokens. Sie ist bewusst vom schema-neutralen <code>components.html</code> getrennt: token-baubare Data-Viz (KPI, Balken, Coverage-Gauge, Ruhestands-Stapel) liegt im Fixture; alles, was eine Runtime (Chart.js) oder eigene Kit-Styles braucht, lebt hier — analog zu <code>brand.html</code>.</p>
+
+  <h2>Chart.js-Templates (WK-Engine)</h2>
+  <div class="grid">
+    <div class="wk-chart-card"><p class="wk-chart-title">Vermögensaufbau — mit vs. ohne</p><div class="wk-chart-canvas"><canvas id="c-line"></canvas></div></div>
+    <div class="wk-chart-card"><p class="wk-chart-title">Kosten vs. Ertrag</p><div class="wk-chart-canvas"><canvas id="c-bar"></canvas></div></div>
+    <div class="wk-chart-card"><p class="wk-chart-title">Portfolio-Allokation</p><div class="wk-chart-canvas"><canvas id="c-donut"></canvas></div></div>
+    <div class="wk-chart-card"><p class="wk-chart-title">Absicherungsgrad</p><div class="wk-chart-canvas is-short"><canvas id="c-gauge"></canvas></div></div>
+  </div>
+
+  <h2>Beratungstools</h2>
+  <div class="links">
+    <a class="toollink" href="beratungstool-din77230.html"><i data-lucide="list-checks"></i> DIN 77230 Finanzanalyse</a>
+    <a class="toollink" href="beratungstool-ruhestand.html"><i data-lucide="armchair"></i> Ruhestandsdisplay</a>
+    <a class="toollink" href="beratungstool-ruhestand-mobile.html"><i data-lucide="rectangle-vertical"></i> Ruhestandsdisplay · Hochformat</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="../kits/wertkurs-charts.js"></script>
+  <script>
+    lucide.createIcons();
+    WK.ready(function () {
+      WK.line(document.getElementById("c-line"), {
+        labels: ["'21","'22","'23","'24","'25"],
+        series: [
+          { label: "Mit wertkurs", data: [40, 58, 80, 108, 142], color: WK.colors.mint },
+          { label: "Sparbuch", data: [40, 44, 49, 55, 62], color: WK.colors.greyL, dashed: true, fill: false }
+        ],
+        yFormat: function (v) { return "€" + v + "k"; }
+      });
+      WK.bar(document.getElementById("c-bar"), {
+        labels: ["2023","2024","2025"],
+        series: [
+          { label: "Kosten", data: [12, 10, 8], color: WK.colors.lotus },
+          { label: "Ertrag", data: [22, 34, 48], color: WK.colors.mint }
+        ]
+      });
+      WK.donut(document.getElementById("c-donut"), {
+        labels: ["Aktien","Anleihen","Immobilien","Cash"],
+        series: [{ data: [46, 24, 20, 10] }]
+      });
+      WK.gauge(document.getElementById("c-gauge"), { value: 74, max: 100 });
+    });
+  </script>
+</body>
+</html>

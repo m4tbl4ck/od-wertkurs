@@ -17,18 +17,7 @@
     "components": "components.html"
   },
   "usage": "USAGE.md",
-  "componentsManifest": "components.manifest.json",
   "assetsDir": "assets",
-  "system": {
-    "dir": "system",
-    "note": "Derived, self-contained preview bundle (OpenDesign system/ convention): each page inlines the tokens.css :root paste plus a neutral --od-* alias layer. Regenerate from tokens.css; do not hand-edit.",
-    "files": [
-      { "path": "system/index.html", "role": "hub", "title": "System assets hub" },
-      { "path": "system/kit.html", "role": "kit", "title": "Component kit (light)" },
-      { "path": "system/kit.dark.html", "role": "kit-dark", "title": "Component kit (dark)" },
-      { "path": "system/tokens.default.json", "role": "theme-config", "title": "Compact ThemeConfig defaults" }
-    ]
-  },
   "craft": {
     "applies": ["landing-page", "deck", "social-post", "flier", "email", "document"],
     "suggested": ["landing-page", "deck", "social-post"],
@@ -42,17 +31,6 @@
       { "path": "preview/spacing.html", "role": "spacing", "title": "Spacing, radius & elevation" },
       { "path": "preview/brand.html", "role": "brand", "title": "Brand vocabulary — Werner, spectrum, retro" },
       { "path": "preview/data-viz.html", "role": "data-viz", "title": "Charts & Beratungstools (live kits)" }
-    ]
-  },
-  "kits": {
-    "dir": "kits",
-    "note": "Vendored wertkurs UI-kit files that need a runtime or their own client-first CSS (not the token contract). Consumed by preview/data-viz.html and the Beratungstool preview pages.",
-    "files": [
-      { "path": "kits/wertkurs-charts.js", "role": "chart-engine", "globals": "WK", "requires": "chart.js@4" },
-      { "path": "kits/wertkurs-charts.css", "role": "chart-styles" },
-      { "path": "kits/beratungstools.css", "role": "advisory-tool-styles" },
-      { "path": "kits/ruhestandsdisplay.css", "role": "advisory-tool-styles" },
-      { "path": "kits/colors_and_type.css", "role": "client-first-tokens", "note": "brand --color-* / --font-* names the kits reference" }
     ]
   },
   "sourceFiles": {

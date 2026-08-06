@@ -1,0 +1,35 @@
+{
+  "$description": "Index of source snippets that justify individual token decisions.",
+  "snippets": [
+    {
+      "id": "mint-field",
+      "token": "--wk-mint",
+      "source": "colors_and_type.css :root --color-yellow-metal",
+      "quote": "primary brand accent (mint green)"
+    },
+    {
+      "id": "wordmark-gradient",
+      "token": "--gradient-brand",
+      "source": "colors_and_type.css --gradient-brand",
+      "quote": "always Ming -> Lotus"
+    },
+    {
+      "id": "radius-standard",
+      "token": "--radius-sm",
+      "source": "colors_and_type.css --radius-standard",
+      "quote": "STANDARD - default for cards, inputs, surfaces (8px)"
+    },
+    {
+      "id": "font-astro-logo",
+      "token": "--font-logo",
+      "source": "colors_and_type.css --font-logo",
+      "quote": "CANONICAL: wertkurs wordmark only"
+    },
+    {
+      "id": "sticker-shadow",
+      "token": "--shadow-sticker",
+      "source": "colors_and_type.css --shadow-sticker",
+      "quote": "hard sticker shadow for retro/pixel elements (no blur)"
+    }
+  ]
+}

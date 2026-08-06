@@ -1,0 +1,306 @@
+/* ============================================================
+   wertkurs — BERATUNGSTOOLS · DIN 77230 Finanzanalyse
+   Brand-conform rendering of the prioritised financial-risk list
+   (3 Bedarfsstufen) for marketing / presentation use.
+
+   Requires colors_and_type.css first. Lucide (`<i data-lucide>` + createIcons)
+   for the info / check glyphs. Self-contained — does not depend on
+   the charts kit.
+
+   Static & clean — optimised for slides / screenshots / PDF.
+   "Variable" themes (order depends on the household) render as a row
+   of dots (.din-placeholder); real themes show name + Grundschutz tag
+   + Lücke + a red→green coverage gauge.
+   ============================================================ */
+
+.din-tool {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ---------- toolbar: version toggle + score legend ---------- */
+.din-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+/* legend explaining the dot-placeholder rows */
+.din-dots-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: var(--text-small);
+  color: var(--color-text-tertiary);
+}
+.din-dots-legend .dots {
+  display: inline-block;
+  width: 46px; height: 6px;
+  background-image: radial-gradient(circle, var(--color-neutral-light) 1.6px, transparent 1.9px);
+  background-size: 15px 6px;
+  background-repeat: repeat-x;
+  background-position: left center;
+  opacity: 0.7;
+}
+
+/* score legend — explains the red→green gauge */
+.din-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: var(--text-small);
+  color: var(--color-text-tertiary);
+}
+.din-legend .bar {
+  width: 84px; height: 7px; border-radius: var(--radius-pill);
+  background: linear-gradient(90deg,
+    var(--color-lotus) 0%, #f29c3d 28%, var(--color-makara-light) 50%, var(--color-yellow-metal) 100%);
+}
+.din-legend .lab-risk { color: var(--color-lotus); font-weight: 600; }
+.din-legend .lab-ok   { color: #1f8a5b; font-weight: 600; }
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.din-card {
+  background: var(--color-surface-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-medium);
+  padding: var(--space-6) var(--space-6) var(--space-5);
+}
+
+.din-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
+  border-bottom: 2px solid var(--color-border-strong);
+}
+.din-head .eyebrow {
+  font: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-accent-mint);
+  margin: 0 0 6px;
+}
+.din-head h2 {
+  font: var(--text-h2);
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.din-head .wordmark { text-align: right; }
+.din-head .text-style-logo { font-size: 1.5rem; }
+.din-head .meta {
+  display: block;
+  font: var(--text-caption);
+  color: var(--color-text-tertiary);
+  margin-top: 6px;
+}
+
+/* ---------- column header ---------- */
+.din-colhead {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 150px 224px;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-3) 10px;
+  font: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-tertiary);
+}
+.din-colhead .h-score { padding-left: 2px; }
+
+/* ============================================================
+   STAGE (Bedarfsstufe)
+   ============================================================ */
+.din-stage { margin-top: var(--space-4); }
+.din-stage:first-of-type { margin-top: 0; }
+
+.din-stage-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-3);
+  background: var(--color-background-subtle);
+  border-radius: var(--radius-standard);
+}
+.din-stage-num {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  flex: none;
+  width: 34px;
+  text-align: center;
+}
+.din-stage-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.din-stage-title .kicker {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-text-tertiary);
+  display: block;
+  margin-bottom: 2px;
+}
+.din-stage-title .name {
+  font: var(--text-h4);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+.din-stage-count {
+  flex: none;
+  font: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 5px 13px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   ROW (Finanzthema)
+   ============================================================ */
+.din-row {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 150px 224px;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--color-hairline);
+}
+.din-stage .din-row:last-child { border-bottom: 0; }
+
+/* rank chip */
+.din-rank {
+  flex: none;
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  background: var(--color-neutral-lightest);
+  border-radius: var(--radius-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+/* topic: name + Grundschutz tag + info dot */
+.din-topic { min-width: 0; }
+.din-name {
+  font: var(--text-body);
+  font-weight: 600;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+.din-tagrow { display: inline-flex; align-items: center; gap: 8px; margin-left: 8px; vertical-align: middle; }
+.din-tag {
+  display: inline-flex; align-items: center;
+  font: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  background: var(--color-neutral-lightest);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.din-info {
+  width: 16px;
+  height: 16px;
+  color: var(--color-neutral-light);
+  cursor: default;
+  user-select: none;
+}
+
+/* Lücke */
+.din-luecke {
+  font: var(--text-small);
+  font-variant-numeric: tabular-nums;
+}
+.din-luecke.none { color: #1f8a5b; font-weight: 600; }
+.din-luecke.gap  { color: var(--color-text); font-weight: 600; }
+.din-luecke .sub { display: block; font-size: 0.72rem; color: var(--color-text-tertiary); font-weight: 400; }
+
+/* Score: value + gauge */
+.din-score {
+  display: flex; align-items: center; gap: 12px;
+}
+.din-score-val {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  width: 48px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex: none;
+}
+.din-bar {
+  position: relative;
+  flex: 1 1 auto;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--color-neutral-lightest);
+  overflow: hidden;
+}
+/* Full red→green gradient spanning the whole track; the fill reveals a window
+   up to --val, so a low score stays in the red zone and a high score reaches
+   mint. Same scale logic as the wertkurs progress bars. */
+.din-bar-fill {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    var(--color-lotus) 0%,
+    #f29c3d 28%,
+    var(--color-makara-light) 50%,
+    var(--color-yellow-metal) 100%);
+  clip-path: inset(0 calc(100% - var(--val, 0%)) 0 0 round var(--radius-pill));
+}
+/* score not yet assessed (e.g. Bedarfsstufe 3 goals) */
+.din-score-val.na { color: var(--color-neutral-light); font-weight: 600; }
+
+/* ============================================================
+   PLACEHOLDER ROW — a "variable theme" whose order/content depends
+   on the household. Shown identically in BOTH modes (it has no real
+   content to reveal). A row of evenly-spaced dots stands in for the
+   theme name; Lücke & Score stay empty.
+   ============================================================ */
+.din-row.din-placeholder { padding-top: 11px; padding-bottom: 11px; }
+.din-row.din-placeholder .din-rank {
+  background: transparent;
+  color: var(--color-neutral-light);
+  font-weight: 700;
+}
+.din-dots {
+  display: block;
+  height: 6px;
+  width: var(--skw, 46%);
+  background-image: radial-gradient(circle, var(--color-neutral-light) 1.6px, transparent 1.9px);
+  background-size: 15px 6px;
+  background-repeat: repeat-x;
+  background-position: left center;
+  opacity: 0.7;
+}
+.din-placeholder .din-bar { background: transparent; }
+
+/* print / PDF friendliness */
+@media print {
+  .din-toolbar { display: none; }
+  .din-card { box-shadow: none; border: 1px solid var(--color-border); }
+}

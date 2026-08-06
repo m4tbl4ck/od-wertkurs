@@ -1,0 +1,86 @@
+# wertkurs — Open Design Package
+
+A portable design-system package built from the **wertkurs Design System** and
+structured to the **Open Design** contract
+(`od-design-system-project/v1`, see
+[nexu-io/open-design · docs/design-systems.md](https://github.com/nexu-io/open-design/blob/main/docs/design-systems.md)).
+
+wertkurs is the brand of **Matthias Schwarz**, a full-service financial advisor
+and distribution partner of **FiNUM.Finanzhaus AG** — a deliberately human,
+un-bank-like fintech look: UPPERCASE neo-grotesque type, a signature mint field,
+a Ming→Lotus wordmark gradient, an 80s cassette-sleeve spectrum, and 16-bit
+pixel-art brand characters (Werner the flamingo, founder emoticons).
+
+## Package layout
+
+```
+design-systems/wertkurs/
+├── manifest.json              ← discovery metadata + declared package files (v1)
+├── DESIGN.md                  ← canonical design prose (11 H2 sections)
+├── tokens.css                 ← canonical compiled tokens (A1/A2/B-slot + brand C-extensions, incl. dark theme)
+├── USAGE.md                   ← agent router — Read Order / Design Highlights / Do / Avoid
+├── components.html            ← standalone component fixture (nav, buttons, tags, cards, form, alerts, table, trust strip, process steps, KPI tiles, FAQ, toggle, retro panel, bar chart, coverage gauges, Ruhestandsdisplay — all token-built)
+├── design-tokens.json         ← DERIVED W3C Design Tokens JSON (regenerate from tokens.css)
+├── tailwind-v4.css            ← DERIVED Tailwind v4 @theme mapping (regenerate from tokens.css)
+├── preview/                   ← indexed preview pages
+│   ├── colors.html            ·   color roles + spectrum + gradients
+│   ├── typography.html        ·   type scale + casing + wordmark
+│   ├── spacing.html           ·   spacing, section rhythm, radius, elevation
+│   ├── brand.html             ·   full brand vocabulary (Werner, emoticon, spectrum, retro, trust badge)
+│   ├── data-viz.html          ·   LIVE kits — Chart.js WK gallery + links to the Beratungstools
+│   ├── beratungstool-din77230.html  ·  DIN 77230 Finanzanalyse (vendored kit page)
+│   ├── beratungstool-ruhestand.html ·  Ruhestandsdisplay (vendored kit page)
+│   └── beratungstool-ruhestand-mobile.html · Ruhestandsdisplay Hochformat (vertikal)
+├── kits/                      ← (undeclared) vendored UI-kit files needing a runtime / own CSS — not part of the manifest contract
+├── system/                    ← (undeclared) self-contained preview bundle mirroring the OpenDesign system/ convention
+│   ├── index.html             ·   hub linking every preview module
+│   ├── kit.html               ·   light component kit (inlined :root + --od-* alias layer)
+│   ├── kit.dark.html          ·   dark component kit
+│   └── tokens.default.json    ·   compact ThemeConfig defaults (colorPrimary / radius / fontSize)
+├── assets/                    ← curated brand assets (logo, Werner, emoticon, grain)
+└── source/                    ← import evidence (normalized)
+    ├── scanned-files.json     ·   sources scanned
+    ├── evidence.md            ·   provenance + mapping decisions
+    ├── tokens.source.json     ·   raw token evidence pre-mapping
+    ├── token-contract.report.json ·  schema coverage report (PASS)
+    └── snippets/INDEX.json    ·   per-token source justifications
+```
+
+## Conformance notes
+
+- **Required trio present:** `manifest.json`, `DESIGN.md`, `tokens.css`; folder
+  slug and `manifest.id` both `wertkurs`.
+- **Token contract:** every required A1-identity, A1-structure, A2 and B-slot
+  token is declared in `tokens.css`; the four B-slots are independently bound.
+  Brand-only tokens are kept as explicit **C-extensions** (`--wk-*`, gradients,
+  mint, sticker shadow, `--font-logo`, bounce easing).
+- **DESIGN.md** has 11 substantive H2 sections (≥7 required) and stays
+  synchronized with `tokens.css`.
+- **Manifest is v1-schema-valid:** only allowed top-level keys are declared and
+  every declared path exists. `components.manifest.json` is **not** declared or
+  shipped — the manifest guard requires it to byte-match the repo's machine
+  deriver, which can't be reproduced by hand; regenerate it with the monorepo's
+  deriver if this package is committed there.
+- **Extra folders `system/` and `kits/` are intentionally undeclared** — they
+  live on disk for human/dev use but stay out of `manifest.json` (the schema
+  rejects unknown top-level keys and only exposes declared preview/source files).
+- **Rich profile** declared: `USAGE.md`, `components.html`, 5 preview pages
+  (colors, typography, spacing, brand, data-viz) and source evidence.
+- **Brand vocabulary** (Werner, founder emoticons, spectrum, 80s-retro, trust
+  badge) lives in `preview/brand.html`, kept separate from the schema-neutral
+  `components.html` so the token contract of the fixture stays pure — the
+  Open-Design-conformant home for asset-driven brand demos.
+- **Data viz — two tiers.** Token-buildable charts (KPI tiles, bar chart,
+  DIN-77230 coverage gauges, Ruhestandsdisplay stacked bars) are pure
+  CSS/HTML and live in `components.html`. Anything needing a runtime or its own
+  client-first CSS — the Chart.js **`WK`** engine and the **Beratungstools**
+  pages — is vendored under `kits/` and demoed in `preview/data-viz.html`
+  (same separation rationale as `brand.html`): the fixture stays token-pure,
+  the live kits get their own preview.
+- **Import mode:** `normalized` — the wertkurs foundation was re-authored into
+  the shared schema (not copied verbatim).
+- **Derived files are caches** — regenerate from `tokens.css` / `components.html`
+  rather than hand-editing.
+
+Brand imagery under `assets/` is referenced for package completeness; the
+proprietary wertkurs / FiNUM. brand assets are not relicensed by this package.

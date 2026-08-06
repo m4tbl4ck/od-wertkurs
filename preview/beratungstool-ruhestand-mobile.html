@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- @dsCard group="UI Kit — Beratungstools" name="Ruhestandsdisplay – Mobile" subtitle="Hochformat, Zeitstrahl von oben nach unten" -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wertkurs — Ruhestandsdisplay · Hochformat</title>
+<link rel="stylesheet" href="https://use.typekit.net/pdd3dqx.css">
+<link rel="stylesheet" href="../kits/colors_and_type.css">
+<link rel="stylesheet" href="../kits/ruhestandsdisplay.css">
+<style>
+  html, body { margin: 0; background: var(--color-background-subtle); }
+  .page { padding: var(--space-5) var(--space-4) var(--space-6); display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="rhd is-vertical" id="rhd">
+
+    <div class="rhd-card">
+      <div class="rhd-head">
+        <div>
+          <p class="eyebrow">Ruhestandsplanung · Kapitalfluss</p>
+          <h2>Ruhestandsdisplay</h2>
+        </div>
+        <div class="wordmark">
+          <span class="text-style-logo">wertkurs</span>
+        </div>
+      </div>
+
+      <div class="rhd-legend" aria-hidden="false">
+        <span class="rhd-legend-item"><span class="rhd-legend-swatch red"></span>Kapitalbedarf</span>
+        <span class="rhd-legend-item"><span class="rhd-legend-swatch green"></span>Vorhandenes Wertkapital</span>
+        <span class="rhd-legend-item"><span class="rhd-legend-swatch yellow"></span>Bedarfsminderung</span>
+      </div>
+
+      <div class="rhd-plot">
+        <div class="rhd-chart" id="rhdChart" role="img"
+             aria-label="Gestapeltes Balkendiagramm im Hochformat: der Kapitalverlauf läuft von oben (Heute) nach unten (Ruhestandsphase); jeder Balken ein Lebensjahr. Roter Kapitalbedarf und grünes Wertkapital wachsen bis zum Ruhestandsbeginn, dort kommt die gelbe Bedarfsminderung hinzu und nimmt wieder ab."></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Ruhestandsdisplay — HOCHFORMAT (mobile, top → bottom).
+   Identical capital model to the landscape version; only the layout
+   axis is rotated (bars are rows that grow left→right; time runs down).
+   ============================================================ */
+const RHD = {
+  yearsToRetire: 29,
+  yearsInRetire: 32,
+  greenAtRetire: 11,
+  redAtRetire:   64,
+  yellowAtRetire:25,
+  growthExp: 2.25
+};
+
+(function () {
+  const chart = document.getElementById("rhdChart");
+
+  const R = RHD.yearsToRetire;
+  const A = RHD.yearsInRetire;
+  const N = R + 1 + A;
+  const retireIndex = R;
+
+  const bars = [];
+  for (let i = 0; i < N; i++) {
+    let green = 0, red = 0, yellow = 0;
+    if (i < retireIndex) {
+      const t = i / retireIndex;
+      const ramp = Math.pow(t, RHD.growthExp);
+      green = RHD.greenAtRetire * ramp;
+      red   = RHD.redAtRetire   * ramp;
+      yellow = 0;
+    } else if (i === retireIndex) {
+      green = RHD.greenAtRetire;
+      red   = RHD.redAtRetire;
+      yellow = RHD.yellowAtRetire;
+    } else {
+      const s = (i - retireIndex) / A;
+      const decay = Math.pow(1 - s, 1.35);
+      const greenNat = RHD.greenAtRetire  * decay * (1 - 0.55 * s);
+      const redNat   = RHD.redAtRetire    * decay * (1 - 0.30 * s);
+      yellow = RHD.yellowAtRetire * decay * (1 + 0.10 * s);
+      // grün läuft gleichmäßig über 5 Balken auf 0; Differenz fängt Rot auf,
+      // damit die Balken-Gesamtlänge (Oberkante) unverändert bleibt.
+      const greenBars = (i - retireIndex);
+      const f = Math.max(0, (5 - greenBars) / 5);
+      green = greenNat * f;
+      red   = redNat + greenNat * (1 - f);
+    }
+    bars.push({ i, green, red, yellow, retire: i === retireIndex });
+  }
+
+  // green (anchor, left) → red → yellow (tip, right)
+  // Low render threshold so even the earliest near-zero years show a small stub,
+  // keeping the timeline visually continuous right under the "Heute" divider
+  // (min-width in CSS guarantees a 4px tick). The red need appears first; green
+  // capital joins once it is meaningful.
+  const barHTML = (b) => {
+    const seg = (cls, v) => v > 0.02 ? `<div class="rhd-seg ${cls}" style="--v:${v}%"></div>` : "";
+    return `<div class="rhd-bar ${b.retire ? "is-retire" : ""}">
+        ${seg("green", b.green)}
+        ${seg("red", b.red)}
+        ${seg("yellow", b.yellow)}
+      </div>`;
+  };
+  const headHTML = (lab, mod) =>
+    `<div class="rhd-phase-head ${mod || ""}">
+       <span class="rhd-phase-node"></span>
+       <span class="rhd-phase-lab">${lab}</span>
+       <span class="rhd-phase-rule"></span>
+     </div>`;
+
+  // assemble the timeline top → bottom. "Heute · Ansparphase" is one divider
+  // sitting directly above the first bar; the thick retirement bar is rendered
+  // at normal row height in the mobile version, with "Ruhestandsphase" above it.
+  const html = [];
+  html.push(headHTML("Heute · Ansparphase"));
+  for (let i = 0; i < retireIndex; i++) html.push(barHTML(bars[i]));
+  html.push(headHTML("Ruhestandsphase"));
+  for (let i = retireIndex; i < N; i++) html.push(barHTML(bars[i]));
+  chart.innerHTML = html.join("");
+})();
+</script>
+</body>
+</html>

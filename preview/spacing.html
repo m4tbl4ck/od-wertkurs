@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wertkurs — Spacing, Radius & Elevation</title>
+<link rel="stylesheet" href="https://use.typekit.net/pdd3dqx.css">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body{margin:0;background:var(--bg);color:var(--fg);font:var(--text-base)/var(--leading-body) var(--font-body);padding:var(--space-8);}
+  .eyebrow{font:700 var(--text-sm)/1.2 var(--font-body);text-transform:uppercase;letter-spacing:0.16em;color:var(--accent-mint);margin:0 0 var(--space-4);}
+  h1{font:800 var(--text-3xl)/var(--leading-tight) var(--font-display);letter-spacing:var(--tracking-display);text-transform:uppercase;margin:0 0 var(--space-6);}
+  h2{font:700 var(--text-xl)/var(--leading-tight) var(--font-display);text-transform:uppercase;margin:var(--space-8) 0 var(--space-4);}
+  .row{display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-3);}
+  .row .name{font:var(--text-xs) var(--font-mono);color:var(--muted);width:120px;flex:none;}
+  .bar{height:20px;background:var(--gradient-brand);border-radius:var(--radius-xs,4px);}
+  .radii{display:flex;gap:var(--space-6);flex-wrap:wrap;}
+  .radii div{width:120px;height:96px;background:var(--surface-warm);border:2px solid var(--fg);display:flex;align-items:flex-end;justify-content:center;padding:var(--space-2);font:var(--text-xs) var(--font-mono);color:var(--fg-2);}
+  .elev{display:flex;gap:var(--space-8);flex-wrap:wrap;}
+  .elev div{width:180px;height:120px;background:var(--surface);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font:var(--text-xs) var(--font-mono);color:var(--muted);}
+  .e-ring{box-shadow:var(--elev-ring);}
+  .e-raised{box-shadow:var(--elev-raised);}
+  .e-sticker{box-shadow:var(--shadow-sticker);border:2px solid var(--fg);border-radius:var(--radius-sm);}
+  .rhythm{display:flex;flex-direction:column;gap:var(--space-2);}
+  .rhythm div{background:color-mix(in oklab,var(--accent-mint),white 55%);border-radius:var(--radius-sm);font:var(--text-xs) var(--font-mono);color:var(--wk-forest);display:flex;align-items:center;padding-left:var(--space-4);}
+</style>
+</head>
+<body>
+  <p class="eyebrow">wertkurs · Open Design Preview</p>
+  <h1>Spacing · Radius · Elevation</h1>
+
+  <h2>Spacing scale (4px base)</h2>
+  <div class="row"><span class="name">--space-1 · 4</span><div class="bar" style="width:4px"></div></div>
+  <div class="row"><span class="name">--space-2 · 8</span><div class="bar" style="width:8px"></div></div>
+  <div class="row"><span class="name">--space-3 · 12</span><div class="bar" style="width:12px"></div></div>
+  <div class="row"><span class="name">--space-4 · 16</span><div class="bar" style="width:16px"></div></div>
+  <div class="row"><span class="name">--space-5 · 20</span><div class="bar" style="width:20px"></div></div>
+  <div class="row"><span class="name">--space-6 · 24</span><div class="bar" style="width:24px"></div></div>
+  <div class="row"><span class="name">--space-8 · 32</span><div class="bar" style="width:32px"></div></div>
+  <div class="row"><span class="name">--space-12 · 48</span><div class="bar" style="width:48px"></div></div>
+
+  <h2>Section rhythm</h2>
+  <div class="rhythm">
+    <div style="height:64px">--section-y-phone · 64px</div>
+    <div style="height:96px">--section-y-tablet · 96px</div>
+    <div style="height:128px">--section-y-desktop · 128px</div>
+  </div>
+
+  <h2>Radius — 8px standard; pill = avatars only</h2>
+  <div class="radii">
+    <div style="border-radius:var(--radius-sm)">sm · 8</div>
+    <div style="border-radius:var(--radius-md)">md · 12</div>
+    <div style="border-radius:var(--radius-lg)">lg · 16</div>
+    <div style="border-radius:var(--radius-pill)">pill · 999</div>
+  </div>
+
+  <h2>Elevation — soft UI + hard sticker</h2>
+  <div class="elev">
+    <div class="e-ring">ring</div>
+    <div class="e-raised">raised</div>
+    <div class="e-sticker">sticker</div>
+  </div>
+</body>
+</html>

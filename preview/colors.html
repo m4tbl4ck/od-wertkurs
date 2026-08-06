@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wertkurs — Colors</title>
+<link rel="stylesheet" href="https://use.typekit.net/pdd3dqx.css">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body{margin:0;background:var(--bg);color:var(--fg);font:var(--text-base)/var(--leading-body) var(--font-body);padding:var(--space-8);}
+  h1{font:800 var(--text-3xl)/var(--leading-tight) var(--font-display);letter-spacing:var(--tracking-display);text-transform:uppercase;margin:0 0 var(--space-2);}
+  h2{font:700 var(--text-xl)/var(--leading-tight) var(--font-display);text-transform:uppercase;margin:var(--space-8) 0 var(--space-4);}
+  .eyebrow{font:700 var(--text-sm)/1.2 var(--font-body);text-transform:uppercase;letter-spacing:0.16em;color:var(--accent-mint);margin:0 0 var(--space-4);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:var(--space-4);}
+  .sw{border:1px solid var(--border-soft);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--elev-raised);}
+  .sw__chip{height:88px;}
+  .sw__meta{padding:var(--space-3) var(--space-4);display:flex;flex-direction:column;gap:2px;}
+  .sw__name{font-weight:700;font-size:var(--text-sm);text-transform:uppercase;letter-spacing:0.03em;}
+  .sw__val{font:var(--text-xs) var(--font-mono);color:var(--muted);}
+  .sw__layer{font:var(--text-xs) var(--font-mono);color:var(--meta);}
+  .bar{height:64px;border-radius:var(--radius-md);}
+  .grad{display:grid;gap:var(--space-4);}
+  .swtxt{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-4);}
+  .pill{padding:var(--space-2) var(--space-4);border-radius:var(--radius-sm);font-weight:700;font-size:var(--text-sm);}
+</style>
+</head>
+<body>
+  <p class="eyebrow">wertkurs · Open Design Preview</p>
+  <h1>Color roles &amp; spectrum</h1>
+
+  <h2>Surfaces &amp; foreground</h2>
+  <div class="grid">
+    <div class="sw"><div class="sw__chip" style="background:var(--bg);border-bottom:1px solid var(--border)"></div><div class="sw__meta"><span class="sw__name">bg</span><span class="sw__val">#ffffff</span><span class="sw__layer">A1-identity</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--surface-warm)"></div><div class="sw__meta"><span class="sw__name">surface-warm</span><span class="sw__val">#f2f2f2</span><span class="sw__layer">B-slot</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--fg)"></div><div class="sw__meta"><span class="sw__name">fg</span><span class="sw__val">#1b1b1b</span><span class="sw__layer">A1-identity</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--fg-2)"></div><div class="sw__meta"><span class="sw__name">fg-2</span><span class="sw__val">#4d4d4d</span><span class="sw__layer">B-slot</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--muted)"></div><div class="sw__meta"><span class="sw__name">muted</span><span class="sw__val">#808080</span><span class="sw__layer">A1-identity</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--border)"></div><div class="sw__meta"><span class="sw__name">border</span><span class="sw__val">#d9d9d9</span><span class="sw__layer">A1-identity</span></div></div>
+  </div>
+
+  <h2>Accent &amp; semantic</h2>
+  <div class="grid">
+    <div class="sw"><div class="sw__chip" style="background:var(--accent)"></div><div class="sw__meta"><span class="sw__name">accent · Ming</span><span class="sw__val">#d962b7</span><span class="sw__layer">A1-identity</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--success)"></div><div class="sw__meta"><span class="sw__name">success</span><span class="sw__val">#2e9e6b</span><span class="sw__layer">A2</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--warn)"></div><div class="sw__meta"><span class="sw__name">warn</span><span class="sw__val">#d99a06</span><span class="sw__layer">A2</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--danger)"></div><div class="sw__meta"><span class="sw__name">danger · Lotus</span><span class="sw__val">#f25835</span><span class="sw__layer">A2</span></div></div>
+  </div>
+
+  <h2>Brand spectrum (C-extension)</h2>
+  <div class="grid">
+    <div class="sw"><div class="sw__chip" style="background:var(--wk-purple)"></div><div class="sw__meta"><span class="sw__name">purple</span><span class="sw__val">#9d62d9</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--wk-ming)"></div><div class="sw__meta"><span class="sw__name">ming</span><span class="sw__val">#d962b7</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--wk-lotus)"></div><div class="sw__meta"><span class="sw__name">lotus</span><span class="sw__val">#f25835</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--wk-makara)"></div><div class="sw__meta"><span class="sw__name">makara</span><span class="sw__val">#f2e96d</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--wk-mint)"></div><div class="sw__meta"><span class="sw__name">mint · signature</span><span class="sw__val">#8fd9b6</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--wk-forest)"></div><div class="sw__meta"><span class="sw__name">forest · trust</span><span class="sw__val">#1d402f</span></div></div>
+  </div>
+
+  <h2>Gradients</h2>
+  <div class="grad">
+    <div class="bar" style="background:var(--gradient-brand)"></div>
+    <div class="bar" style="background:var(--gradient-spectrum)"></div>
+  </div>
+
+  <h2>Text-on-colour</h2>
+  <div class="swtxt">
+    <span class="pill" style="background:var(--accent);color:var(--accent-on)">Ming + white</span>
+    <span class="pill" style="background:var(--wk-mint);color:var(--accent-mint-on)">Mint + white</span>
+    <span class="pill" style="background:var(--fg);color:#fff">Ink + white</span>
+    <span class="pill" style="background:var(--wk-forest);color:#fff">Forest + white</span>
+  </div>
+</body>
+</html>

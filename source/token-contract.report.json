@@ -1,0 +1,63 @@
+{
+  "$description": "Token-contract coverage report — wertkurs vs the Open Design shared TOKEN_SCHEMA.",
+  "generatedAt": "2026-08-04T22:00:00Z",
+  "schema": "od-design-system-project/v1",
+  "coverage": {
+    "A1-identity": {
+      "required": 8,
+      "declared": 8,
+      "missing": []
+    },
+    "A1-structure": {
+      "required": 18,
+      "declared": 18,
+      "missing": []
+    },
+    "A2": {
+      "required": 26,
+      "declared": 26,
+      "missing": []
+    },
+    "B-slot": {
+      "required": 4,
+      "declared": 4,
+      "aliasedToSibling": [],
+      "independentlyBound": [
+        "--surface-warm",
+        "--fg-2",
+        "--meta",
+        "--border-soft"
+      ]
+    }
+  },
+  "brandExtensions": {
+    "note": "wertkurs-only C-extension tokens; would be added to BRAND_EXTENSIONS['wertkurs'] in the monorepo.",
+    "names": [
+      "--wk-mint",
+      "--wk-makara",
+      "--wk-lotus",
+      "--wk-ming",
+      "--wk-purple",
+      "--wk-forest",
+      "--accent-mint",
+      "--accent-warm",
+      "--accent-sun",
+      "--accent-violet",
+      "--accent-mint-on",
+      "--gradient-brand",
+      "--gradient-spectrum",
+      "--gradient-headline",
+      "--font-logo",
+      "--shadow-sticker",
+      "--shadow-brand-mint",
+      "--shadow-brand-ming",
+      "--ease-bounce"
+    ]
+  },
+  "darkTheme": {
+    "selector": "[data-theme=\"dark\"]",
+    "canvas": "#020202",
+    "note": "Overrides semantic tokens only."
+  },
+  "result": "PASS"
+}

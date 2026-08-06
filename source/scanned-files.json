@@ -1,0 +1,42 @@
+{
+  "$description": "Files scanned from the bundled wertkurs Design System to derive this normalized Open Design package.",
+  "importMode": "normalized",
+  "scannedAt": "2026-08-04T22:00:00Z",
+  "files": [
+    {
+      "path": "_ds/wertkurs-design-system/colors_and_type.css",
+      "role": "token-foundation",
+      "note": "Primary source for colors, type scale, radii, shadows, spacing."
+    },
+    {
+      "path": "_ds/wertkurs-design-system/README.md",
+      "role": "design-prose",
+      "note": "Brand values, voice, visual foundations, iconography."
+    },
+    {
+      "path": "DESIGN.md (project root, approved)",
+      "role": "design-prose-canonical",
+      "note": "The brand's approved DESIGN.md — ported near-verbatim into design-systems/wertkurs/DESIGN.md (Overview, Colors, Typography, Components, Layout, Depth, Motion, Do/Don't, Anti-Patterns)."
+    },
+    {
+      "path": "_ds/wertkurs-design-system/styles.css",
+      "role": "component-css",
+      "note": "Aggregated UI-kit styles (@imports)."
+    },
+    {
+      "path": "_ds/wertkurs-design-system/ui_kits/website/wertkurs-website.css",
+      "role": "component-css",
+      "note": "Nav, hero, cards, process, FAQ, CTA, footer."
+    },
+    {
+      "path": "_ds/wertkurs-design-system/ui_kits/presentation/wertkurs-presentation.css",
+      "role": "component-css",
+      "note": "1920x1080 deck slide vocabulary."
+    },
+    {
+      "path": "_ds/wertkurs-design-system/ui_kits/charts/wertkurs-charts.css",
+      "role": "component-css",
+      "note": "Background-neutral data-viz tokens."
+    }
+  ]
+}
